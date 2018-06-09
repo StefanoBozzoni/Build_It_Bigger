@@ -22,11 +22,14 @@ import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.IdlingResource;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+
+import com.udacity.gradle.builditbigger.IdlingResource.SimpleIdlingResource;
 
 import org.junit.After;
 import org.junit.Before;
@@ -51,7 +54,7 @@ import org.junit.runner.RunWith;
  */
 
 @RunWith(AndroidJUnit4.class)
-public class IdlingResourceMenuActivityTest {
+public class AsyncTaskTest {
 
     /**
      * The ActivityTestRule is a rule provided by Android used for functional testing of a single
@@ -69,7 +72,6 @@ public class IdlingResourceMenuActivityTest {
 
     // Registers any resource that needs to be synchronized with Espresso before the test is run.
     @Before
-    @SuppressWarnings("deprecation")
     public void registerIdlingResource() {
         mIdlingResource = mActivityTestRule.getActivity().getIdlingResource();
         // To prove that the test fails, omit this call:
@@ -81,15 +83,15 @@ public class IdlingResourceMenuActivityTest {
        // onData(anything()).inAdapterView(withId(R.id.tea_grid_view)).atPosition(0).perform(click());
         onView(withId(R.id.bt_tellAJoke)).perform(click());
         onView(withId(R.id.tv_joke)).check(matches(isDisplayed()));
+        onView(withId(R.id.tv_joke)).check(matches(withText("this is a simple Joke!")));
+
     }
 
     // Remember to unregister resources when not needed to avoid malfunction.
     @After
-    @SuppressWarnings("deprecation")
     public void unregisterIdlingResource() {
         if (mIdlingResource != null) {
             Espresso.unregisterIdlingResources(mIdlingResource);
         }
-
     }
 }

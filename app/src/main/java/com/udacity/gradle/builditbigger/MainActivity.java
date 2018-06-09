@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements
         return super.onOptionsItemSelected(item);
     }
 
-    public void tellJoke(View view) {
+    public void tellJoke(android.view.View view) {
         ProgressBar pb = (ProgressBar) findViewById(R.id.progressBar);
         pb.setVisibility(View.VISIBLE);
         new EndpointsAsyncTask(this,mIdlingResource).execute();
