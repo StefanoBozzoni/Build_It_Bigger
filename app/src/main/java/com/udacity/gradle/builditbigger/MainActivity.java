@@ -12,6 +12,7 @@ import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import com.example.jokedisplayer.JokeDisplayerActivity;
 import com.udacity.gradle.builditbigger.IdlingResource.SimpleIdlingResource;
@@ -39,7 +40,10 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onCallBack(String strToDisplay) {
+        ProgressBar pb = findViewById(R.id.progressBar);
+        pb.setVisibility(View.GONE);
         Intent i= new Intent(this, JokeDisplayerActivity.class);
+
         i.putExtra(JOKE_EXTRA,strToDisplay);
         startActivity(i);
     }
@@ -76,7 +80,10 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     public void tellJoke(View view) {
-        new EndpointsAsyncTask(this,mIdlingResource).execute(new Pair<Context, String>(this, ""));
+        ProgressBar pb = (ProgressBar) findViewById(R.id.progressBar);
+        pb.setVisibility(View.VISIBLE);
+        new EndpointsAsyncTask(this,mIdlingResource).execute();
+
     }
 
 }

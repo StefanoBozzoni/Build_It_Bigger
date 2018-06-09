@@ -20,7 +20,7 @@ android {
         }
     }
     compileSdkVersion 27
-    buildToolsVersion "26.0.3"
+    buildToolsVersion "27.0.3"
     defaultConfig {
         applicationId "com.udacity.gradle.builditbigger"
         minSdkVersion 16
@@ -40,27 +40,36 @@ android {
     flavorDimensions "main"
     productFlavors {
         free {
-            minSdkVersion 16
             applicationId 'com.udacity.gradle.builditbigger.free'
             dimension "main"
         }
         paid {
-            minSdkVersion 16
+
             applicationId 'com.udacity.gradle.builditbigger.paid'
             dimension "main"
         }
     }
+    sourceSets {
+        free {
+            java.srcDirs = ['src/free/java', 'src/free/java/']
+            res.srcDirs = ['src/free/res', 'src/free/res/layout']
+        }
+        paid { res.srcDirs = ['src/paid/res', 'src/paid/res/layout'] }
+    }
 }
 
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+//sourceCompatibility = JavaVersion.VERSION_1_8
+//targetCompatibility = JavaVersion.VERSION_1_8
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     endpointsServer project(path: ':backend', configuration: 'endpoints')
-    implementation   'com.android.support:appcompat-v7:27.1.1', {
-        exclude group: 'com.android.support.customtabs'
-    }
+
+    implementation 'com.android.support:support-v4:27.1.1'
+    implementation 'com.android.support:support-media-compat:27.1.1'
+    implementation 'com.android.support:customtabs:27.1.1'
+
+    implementation   'com.android.support:appcompat-v7:27.1.1'
     freeImplementation    'com.google.android.gms:play-services-ads:15.0.1'
     implementation 'com.google.api-client:google-api-client:1.23.0'
     implementation 'com.google.http-client:google-http-client-android:1.23.0'
@@ -81,12 +90,16 @@ dependencies {
     androidTestImplementation 'com.android.support:support-annotations:27.1.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-intents:3.0.2'
-    androidTestImplementation 'com.android.support.test:rules:1.0.2', {
-        exclude group: 'com.android.support.customtabs'
-    }
-    androidTestImplementation 'com.android.support.test:runner:1.0.2', {
-        exclude group: 'com.android.support.customtabs'
-    }
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
 
+    task optionalTask(dependsOn: [':backend:appengineStop',
+                                  ":backend:appengineRun",
+                                  ":app:connectedAndroidTest",
+                                  ':backend:appengineStop']) {
+        doLast {
+            println 'optionalTask completed'
+        }
+    }
 
 }

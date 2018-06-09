@@ -2,20 +2,30 @@
 
 buildscript {
     repositories {
+        google()  //it always should be before jcenter(), or it would not work
         jcenter()
     }
     dependencies {
         classpath 'com.google.guava:guava:22.0'
-        classpath 'com.android.tools.build:gradle:3.0.1'
-
+        classpath 'com.android.tools.build:gradle:3.1.2'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
 }
 
+
 allprojects {
     repositories {
+        google() //it always should be before jcenter(), or it would not work
         jcenter()
-        google()
+
     }
+
 }
+
+def bootClasspathStr = 'C:/Program Files/Java/jre1.8.0_172/lib/rt.jar'
+project.tasks.withType(AbstractCompile, { AbstractCompile ac ->
+    ac.options.bootClasspath = bootClasspathStr // options is always there but not defined on AbstractCompile so going to hit it anyway
+})
+
+
