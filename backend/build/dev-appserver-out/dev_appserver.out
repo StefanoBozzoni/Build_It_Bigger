@@ -1,21 +1,9 @@
-giu 09, 2018 9:46:56 AM java.util.prefs.WindowsPreferences <init>
+giu 10, 2018 11:17:59 AM java.util.prefs.WindowsPreferences <init>
 AVVERTENZA: Could not open/create prefs root node Software\JavaSoft\Prefs at root 0x80000002. Windows RegCreateKeyEx(...) returned error code 5.
-giu 09, 2018 9:46:56 AM com.google.appengine.tools.development.SystemPropertiesManager setSystemProperties
+giu 10, 2018 11:17:59 AM com.google.appengine.tools.development.SystemPropertiesManager setSystemProperties
 INFORMAZIONI: Overwriting system property key 'java.util.logging.config.file', value 'D:\Program Files\google\Cloud SDK\google-cloud-sdk\platform\google_appengine\google\appengine\tools\java\config\sdk\logging.properties' with value 'WEB-INF/logging.properties' from 'D:\stefa\Documents\SviluppoAndroid\Build_It_Bigger\backend\build\exploded-backend\WEB-INF\appengine-web.xml'
-2018-06-09 09:46:56.882:INFO::main: Logging initialized @421ms
-giu 09, 2018 7:46:57 AM com.google.appengine.tools.development.IsolatedAppClassLoader checkWorkingDirectory
-AVVERTENZA: Your working directory, (D:\stefa\Documents\SviluppoAndroid\Build_It_Bigger) is not equal to your 
-web application root (D:\stefa\Documents\SviluppoAndroid\Build_It_Bigger\backend\build\exploded-backend)
-You will not be able to access files from your working directory on the production server.
+2018-06-10 11:17:59.867:INFO::main: Logging initialized @416ms
 
-2018-06-09 09:46:57.662:INFO:oejs.Server:main: jetty-9.3.18.v20170406
-2018-06-09 09:47:00.552:INFO:oeja.AnnotationConfiguration:main: Scanning elapsed time=2385ms
-2018-06-09 09:47:00.958:INFO:oejsh.ContextHandler:main: Started c.g.a.t.d.j.DevAppEngineWebAppContext@41488b16{/,file:///D:/stefa/Documents/SviluppoAndroid/Build_It_Bigger/backend/build/exploded-backend/,AVAILABLE}{D:\stefa\Documents\SviluppoAndroid\Build_It_Bigger\backend\build\exploded-backend}
-2018-06-09 09:47:00.974:INFO:oejs.AbstractConnector:main: Started NetworkTrafficSelectChannelConnector@638ef7ed{HTTP/1.1,[http/1.1]}{localhost:8080}
-2018-06-09 09:47:00.975:INFO:oejs.Server:main: Started @4515ms
-giu 09, 2018 7:47:00 AM com.google.appengine.tools.development.AbstractModule startup
-INFORMAZIONI: Module instance default is running at http://localhost:8080/
-giu 09, 2018 7:47:00 AM com.google.appengine.tools.development.AbstractModule startup
-INFORMAZIONI: The admin console is running at http://localhost:8080/_ah/admin
-giu 09, 2018 9:47:00 AM com.google.appengine.tools.development.DevAppServerImpl doStart
-INFORMAZIONI: Dev App Server is now running
+************************************************
+Could not open the requested socket: Address already in use: bind
+Try overriding --address and/or --port.

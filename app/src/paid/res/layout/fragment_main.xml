@@ -22,8 +22,8 @@
         android:layout_below="@+id/instructions_text_view"
         android:onClick="tellJoke"
         android:text="@string/button_text"
-        android:visibility="gone"
-        tools:ignore="OnClick" />
+        tools:ignore="OnClick"
+        />
 
     <ProgressBar
         android:id="@+id/progressBar"

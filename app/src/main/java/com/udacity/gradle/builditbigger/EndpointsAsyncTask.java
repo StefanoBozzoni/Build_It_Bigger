@@ -1,34 +1,30 @@
 package com.udacity.gradle.builditbigger;
 
-import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Pair;
-import android.widget.Toast;
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
 import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
-import com.udacity.gradle.builditbigger.IdlingResource.SimpleIdlingResource;
+import com.udacity.gradle.builditbigger.IdlingResource.SimpleCountingIdlingResource;
 import com.udacity.gradle.builditbigger.backend.myApi.MyApi;
 
 import java.io.IOException;
 
 class EndpointsAsyncTask extends AsyncTask<String, Void, String> {
-    SimpleIdlingResource mIdlingResource;
+    SimpleCountingIdlingResource mIdlingResource;
 
     interface EndpointCallBack {
         public void onCallBack(String strToDisplay);
     }
 
     private static MyApi myApiService = null;
-    //private Context mContext;
     private EndpointCallBack mCallBack;
 
-
-    EndpointsAsyncTask(EndpointCallBack callBack,SimpleIdlingResource anIdlingResource) {
+    EndpointsAsyncTask(EndpointCallBack callBack,SimpleCountingIdlingResource anIdlingResource) {
         mCallBack=callBack;
         mIdlingResource=anIdlingResource;
+        mIdlingResource.increment();
     }
 
     @SafeVarargs
@@ -52,14 +48,8 @@ class EndpointsAsyncTask extends AsyncTask<String, Void, String> {
             myApiService = builder.build();
         }
 
-
         try {
-            //return myApiService.sayHi(name).execute().getData();
-            //return myApiService.sayHi(name).execute().getData();
-            mIdlingResource.setIdleState(false);
             return  myApiService.getApiJoke().execute().getData();
-
-
         } catch (IOException e) {
             return e.getMessage();
         }
@@ -67,9 +57,7 @@ class EndpointsAsyncTask extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        mIdlingResource.setIdleState(true);
-        //Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+        mIdlingResource.decrement();
         mCallBack.onCallBack(result);
-        mIdlingResource.setIdleState(true);
     }
 }

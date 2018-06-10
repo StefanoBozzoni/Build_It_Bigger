@@ -23,6 +23,7 @@ apply plugin: 'com.google.cloud.tools.endpoints-framework-server'
 //sourceCompatibility = JavaVersion.VERSION_1_8
 //targetCompatibility = JavaVersion.VERSION_1_8
 
+
 dependencies {
     implementation 'com.google.endpoints:endpoints-framework:2.0.9'
     implementation 'javax.inject:javax.inject:1'
@@ -32,3 +33,4 @@ dependencies {
     implementation 'com.google.http-client:google-http-client-android:1.23.0'
     implementation project(path: ':TellJokesLib')
 }
+

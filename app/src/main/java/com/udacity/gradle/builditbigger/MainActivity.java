@@ -15,28 +15,14 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.example.jokedisplayer.JokeDisplayerActivity;
-import com.udacity.gradle.builditbigger.IdlingResource.SimpleIdlingResource;
-
+import com.udacity.gradle.builditbigger.IdlingResource.EspressoIdlingResource;
+import com.udacity.gradle.builditbigger.IdlingResource.SimpleCountingIdlingResource;
 
 public class MainActivity extends AppCompatActivity implements
         EndpointsAsyncTask.EndpointCallBack {
     // The Idling Resource which will be null in production.
-    private final static String JOKE_EXTRA="JOKE_ESTRA";
+    private final static String JOKE_EXTRA="JOKE_EXTRA";
 
-    @Nullable
-    private SimpleIdlingResource mIdlingResource;
-
-    /**
-     * Only called from test, creates and returns a new {@link SimpleIdlingResource}.
-     */
-    @VisibleForTesting
-    @NonNull
-    public IdlingResource getIdlingResource() {
-        if (mIdlingResource == null) {
-            mIdlingResource = new SimpleIdlingResource();
-        }
-        return mIdlingResource;
-    }
 
     @Override
     public void onCallBack(String strToDisplay) {
@@ -52,8 +38,6 @@ public class MainActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        getIdlingResource(); // Get the IdlingResource instance
     }
 
 
@@ -82,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements
     public void tellJoke(android.view.View view) {
         ProgressBar pb = (ProgressBar) findViewById(R.id.progressBar);
         pb.setVisibility(View.VISIBLE);
+        SimpleCountingIdlingResource mIdlingResource = (SimpleCountingIdlingResource) EspressoIdlingResource.getIdlingResource();
         new EndpointsAsyncTask(this,mIdlingResource).execute();
 
     }
